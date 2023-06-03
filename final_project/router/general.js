@@ -40,4 +40,4 @@ public_users.get('/review/:isbn',function (req, res) {
   return res.status(300).json({message: "Yet to be implemented"});
 });
 
-module.exports.general = public_users;
+module.exports.general = public_users

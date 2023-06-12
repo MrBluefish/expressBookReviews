@@ -1,6 +1,6 @@
 const express = require('express');
 const jwt = require('jsonwebtoken');
-let books = require("./booksdb.js");
+
 const regd_users = express.Router();
 
 let users = [];
@@ -28,7 +28,13 @@ regd_users.post("/login", (req, res) => {
   );
 
   if (user) {
-    return res.status(200).json({ message: "Login successful" });
+    // Generate JWT token
+    const token = jwt.sign({ username: user.username }, '2k2d1w');
+
+    // Save user credentials for the session
+    users.push(user);
+
+    return res.status(200).json({ message: "Login successful", token });
   } else {
     return res.status(401).json({ message: "Invalid username or password" });
   }
